@@ -5,10 +5,11 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testorbit.engine.model.request.ApiRequest;
+import org.testorbit.engine.model.response.ApiResponse;
 
 public class ApiExecutor {
 
-    public Response executeGet(ApiRequest request) {
+    public ApiResponse execute(ApiRequest request) {
 
         RequestSpecification specification =
                 RestAssured.given();
@@ -21,6 +22,14 @@ public class ApiExecutor {
                 .when()
                 .get(request.getUrl());
 
-        return response;
+        ApiResponse apiResponse = new ApiResponse(
+
+                response.getStatusCode(),
+                response.getBody().asString(),
+                response.getTime()
+
+        );
+
+        return apiResponse ;
     }
 }

@@ -15,6 +15,8 @@ public class ApiRequest {
         this.body = body ;
     }
 
+
+
     public String getUrl(){
         return url ;
     }
